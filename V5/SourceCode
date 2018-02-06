@@ -1,0 +1,230 @@
+package Encode;
+
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+import java.awt.datatransfer.*;
+import java.awt.Toolkit;
+
+public class ED {
+	
+	
+	
+	
+	
+	
+	public static void main(String[] args) throws InterruptedException {
+		//Stuff needed to be updated before sending out new patch//
+		String V = "V5";
+		int NOC = 59; // Number Of Characters
+		//////////////////////////\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+		int LN = 1; //Last Number
+		String TTU = ""; //Text To Use
+		String EnDeTe = ""; // Encoded Decoded Text
+		String TT = ""; // Transfer Text
+		int NUM1 = 0; // Number Of Moduleses1
+		int TTT = 0; //I'm not sure if I use this, Evidently I do but i'm unaware of how I use it.
+		
+		
+		JFrame frame = new JFrame();
+		
+		String st = (String)JOptionPane.showInputDialog(
+		                    frame,
+		                    "Encode or decode? \n",
+		                    "Encode or decode",
+		                    JOptionPane.PLAIN_MESSAGE);
+		TTU = (String)JOptionPane.showInputDialog(
+                frame,
+                "Insert Text to " + st + "\n",
+                "Text to " + st,
+                JOptionPane.PLAIN_MESSAGE);
+		TTU = TTU.toLowerCase();
+		
+		//Removes version from encoded
+		TTU.substring(0,TTU.length()-1);
+		TTU.substring(0,TTU.length()-1);
+		
+		
+		if (st.equalsIgnoreCase("encode"))
+			{
+			System.out.print(TTU);
+			for (int i = 0 ; i < TTU.length() ; i++)
+				{
+			    
+				NUM1 = 0;
+			    String c = Character.toString(TTU.charAt(i));
+			    if (alphabettoint(c) == -1) {System.exit(0);}
+			    TTT = (LN*alphabettoint(c));
+			    	System.out.println(TTT);
+			    while (TTT > NOC) {
+			    	TTT = TTT - NOC; 
+			    	NUM1++;
+			    }
+			    	System.out.println();
+			    TT = inttoalphabet(LN*alphabettoint(c)-NOC*NUM1);
+			    	System.out.println(NUM1);
+			   LN = alphabettoint(c);
+			    EnDeTe = EnDeTe + inttoalphabet(NUM1);
+			    EnDeTe = EnDeTe + TT;
+			    	System.out.println("/n");
+				}
+			
+			}
+		if (st.equalsIgnoreCase("decode"))
+		{
+			System.out.print(TTU);
+			EnDeTe = Character.toString(TTU.charAt(1));
+			int PC = alphabettoint(Character.toString(TTU.charAt(1)));
+ 			for (int i = 3 ; i < ((TTU.length())) ; i = i+2)
+			{
+ 				String c = "";
+				System.out.println( "/n" + i );
+				int CC = alphabettoint(Character.toString(TTU.charAt((i))));
+				System.out.println(CC);
+				int KC = alphabettoint(Character.toString(TTU.charAt((i-1))));
+				System.out.println(KC);
+				if (PC == 0) {c = inttoalphabet(CC);}
+				else {c = inttoalphabet((CC+KC*NOC)/PC);}
+				System.out.println(alphabettoint(c));
+				EnDeTe  = EnDeTe + c;
+				PC = alphabettoint(c);
+		}
+			
+		}
+		EnDeTe = EnDeTe + V;
+		JOptionPane.showMessageDialog(frame, EnDeTe);
+		String myString = EnDeTe;
+		StringSelection stringSelection = new StringSelection(myString);
+		Clipboard clpbrd = Toolkit.getDefaultToolkit().getSystemClipboard();
+		clpbrd.setContents(stringSelection, null);
+		System.exit(0);
+	}
+
+	
+	public static String inttoalphabet(int c) {
+		if (c == 0) {return ".";}
+	    if (c == 1) {return "a";}
+	    else if (c == 2) {return "b";}
+	    else if (c == 3) {return "c";}
+	    else if (c == 4) {return "d";}
+	    else if (c == 5) {return "e";}
+	    else if (c == 6) {return "f";}
+	    else if (c == 7) {return "g";}
+	    else if (c == 8) {return "h";}
+	    else if (c == 9) {return "i";}
+	    else if (c == 10) {return "j";}
+	    else if (c == 11) {return "k";}
+	    else if (c == 12) {return "l";}
+	    else if (c == 13) {return "m";}
+	    else if (c == 14) {return "n";}
+	    else if (c == 15) {return "o";}
+	    else if (c == 16) {return "p";}
+	    else if (c == 17) {return "q";}
+	    else if (c == 18) {return "r";}
+	    else if (c == 19) {return "s";}
+	    else if (c == 20) {return "t";}
+	    else if (c == 21) {return "u";}
+	    else if (c == 22) {return "v";}
+	    else if (c == 23) {return "w";}
+	    else if (c == 24) {return "x";}
+		else if (c == 25) {return "y";}
+		else if (c == 26) {return "z";}
+		else if (c == 27) {return " ";}
+		else if (c == 28) {return "?";}
+		else if (c == 29) {return "/";}
+		else if (c == 30) {return ":";}
+		else if (c == 31) {return "0";}
+		else if (c == 32) {return "1";}
+		else if (c == 33) {return "2";}
+		else if (c == 34) {return "3";}
+		else if (c == 35) {return "4";}
+		else if (c == 36) {return "5";}
+		else if (c == 37) {return "6";}
+		else if (c == 38) {return "7";}
+		else if (c == 39) {return "8";}
+		else if (c == 40) {return "9";}
+		else if (c == 41) {return "=";}
+		else if (c == 42) {return "+";}
+		else if (c == 43) {return "-";}
+		else if (c == 44) {return "_";}
+		else if (c == 45) {return "`";}
+		else if (c == 46) {return "~";}
+		else if (c == 47) {return "!";}
+		else if (c == 48) {return "@";}
+		else if (c == 49) {return "#";}
+		else if (c == 50) {return "$";}
+		else if (c == 51) {return "%";}
+		else if (c == 52) {return "^";}
+		else if (c == 53) {return "&";}
+		else if (c == 54) {return "*";}
+		else if (c == 55) {return "(";}
+		else if (c == 56) {return ")";}
+		else if (c == 57) {return ";";}
+		else if (c == 58) {return "'";}
+		else if (c == 59) {return "|";}
+	    
+		else {return "   ERROR RE-ENTER YOUR MESSAGE IF THIS COMES UP AGAIN REPORT THE CREATOR   ";}
+	}
+	public static int alphabettoint(String c) {
+		if(c.equalsIgnoreCase(".")) {return 0;}
+		else if(c.equalsIgnoreCase("a")) {return 1;}
+		else if(c.equalsIgnoreCase("b")) {return 2;}
+		else if(c.equalsIgnoreCase("c")) {return 3;}
+		else if(c.equalsIgnoreCase("d")) {return 4;}
+		else if(c.equalsIgnoreCase("e")) {return 5;}
+		else if(c.equalsIgnoreCase("f")) {return 6;}
+		else if(c.equalsIgnoreCase("g")) {return 7;}
+		else if(c.equalsIgnoreCase("h")) {return 8;}
+		else if(c.equalsIgnoreCase("i")) {return 9;}
+		else if(c.equalsIgnoreCase("j")) {return 10;}
+		else if(c.equalsIgnoreCase("k")) {return 11;}
+		else if(c.equalsIgnoreCase("l")) {return 12;}
+		else if(c.equalsIgnoreCase("m")) {return 13;}
+		else if(c.equalsIgnoreCase("n")) {return 14;}
+		else if(c.equalsIgnoreCase("o")) {return 15;}
+		else if(c.equalsIgnoreCase("p")) {return 16;}
+		else if(c.equalsIgnoreCase("q")) {return 17;}
+		else if(c.equalsIgnoreCase("r")) {return 18;}
+		else if(c.equalsIgnoreCase("s")) {return 19;}
+		else if(c.equalsIgnoreCase("t")) {return 20;}
+		else if(c.equalsIgnoreCase("u")) {return 21;}
+		else if(c.equalsIgnoreCase("v")) {return 22;}
+		else if(c.equalsIgnoreCase("w")) {return 23;}
+		else if(c.equalsIgnoreCase("x")) {return 24;}
+		else if(c.equalsIgnoreCase("y")) {return 25;}
+		else if(c.equalsIgnoreCase("z")) {return 26;}
+		else if(c.equalsIgnoreCase(" ")) {return 27;}
+		else if(c.equalsIgnoreCase("?")) {return 28;}
+		else if(c.equalsIgnoreCase("/")) {return 29;}
+		else if(c.equalsIgnoreCase(":")) {return 30;}
+		else if(c.equalsIgnoreCase("0")) {return 31;}
+		else if(c.equalsIgnoreCase("1")) {return 32;}
+		else if(c.equalsIgnoreCase("2")) {return 33;}
+		else if(c.equalsIgnoreCase("3")) {return 34;}
+		else if(c.equalsIgnoreCase("4")) {return 35;}
+		else if(c.equalsIgnoreCase("5")) {return 36;}
+		else if(c.equalsIgnoreCase("6")) {return 37;}
+		else if(c.equalsIgnoreCase("7")) {return 38;}
+		else if(c.equalsIgnoreCase("8")) {return 39;}
+		else if(c.equalsIgnoreCase("9")) {return 40;}
+		else if(c.equalsIgnoreCase("=")) {return 41;}
+		else if(c.equalsIgnoreCase("+")) {return 42;}
+		else if(c.equalsIgnoreCase("-")) {return 43;}
+		else if(c.equalsIgnoreCase("_")) {return 44;}
+		else if(c.equalsIgnoreCase("`")) {return 45;}
+		else if(c.equalsIgnoreCase("~")) {return 46;}
+		else if(c.equalsIgnoreCase("!")) {return 47;}
+		else if(c.equalsIgnoreCase("@")) {return 48;}
+		else if(c.equalsIgnoreCase("#")) {return 49;}
+		else if(c.equalsIgnoreCase("$")) {return 50;}
+		else if(c.equalsIgnoreCase("%")) {return 51;}
+		else if(c.equalsIgnoreCase("^")) {return 52;}
+		else if(c.equalsIgnoreCase("&")) {return 53;}
+		else if(c.equalsIgnoreCase("*")) {return 54;}
+		else if(c.equalsIgnoreCase("(")) {return 55;}
+		else if(c.equalsIgnoreCase(")")) {return 56;}
+		else if(c.equalsIgnoreCase(";")) {return 57;}
+		else if(c.equalsIgnoreCase("'")) {return 58;}
+		else if(c.equalsIgnoreCase("|")) {return 59;}
+		else {return -1;}
+	}	
+}
